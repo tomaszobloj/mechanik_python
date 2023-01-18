@@ -15,8 +15,9 @@ import csv
 def system_logowania(inlog, inpass):
   if inlog == dane_logowania.username:
     if inpass == dane_logowania.password:
-      print("Zalogowano! Witaj ", dane_logowania.username,
-            " miło Cię znowu widzieć.")
+      print("| Witaj ", dane_logowania.username,
+            " miło Cię znowu widzieć.      |")
+      print("=============================================")
       zapisywanie_czasu()
       return True
     else:
@@ -29,15 +30,15 @@ def system_logowania(inlog, inpass):
 
 # wprowadzanie nazwy użytkownika
 def wprowadz_nazwe():
-  print("==========")
-  input_login = input("Podaj nazwę użytkownika: ")
+  print("=============================================")
+  input_login = input("| Podaj nazwę użytkownika: ")
   return input_login
 
 
 # wprowadzanie hasła użytkownika
 def wprowadz_haslo():
-  input_password = input("Podaj hasło: ")
-  print("==========")
+  input_password = input("| Podaj hasło: ")
+  print("=============================================")
   return input_password
 
 
@@ -52,7 +53,10 @@ def zapisywanie_czasu():
 # zapisywanie danych ktore wprowadzi uzytkownik o naprawie samochodu i zapisanie do listy w pliku
 def zapisywanie_danych_auta(marka, model, rocznik, tablica, jaki_problem,
                             nazwa_pliku):
-  czas = datetime.datetime.now()
+  x = datetime.datetime.now()
+  dzien = x.day
+  miesiac = x.month
+  rok = x.year
   marka = marka
   model = model
   rocznik = rocznik
@@ -61,7 +65,38 @@ def zapisywanie_danych_auta(marka, model, rocznik, tablica, jaki_problem,
   plik = str(nazwa_pliku + ".txt")
   with open(plik, 'w', newline="") as dane_auta:
     zapis = csv.writer(dane_auta)
-    zapis.writerow([marka, model, rocznik, tablica, jaki_problem, czas])
+    zapis.writerow(
+      [marka, model, rocznik, tablica, jaki_problem, dzien, miesiac, rok])
+
+
+def odczytywanie_danych_auta(nazwa_pliku):
+  nazwa_pliku += ".txt"
+  with open(nazwa_pliku) as txt_file:
+    wypisywacz = csv.reader(txt_file, delimiter=",")
+
+    for linia in wypisywacz:
+      marka = linia[0]
+      model = linia[1]
+      rocznik = linia[2]
+      tablica = linia[3]
+      jaki_problem = linia[4]
+      print("Problem :", jaki_problem,
+            " został rozwiązany w samochodzie marki ", marka, model,
+            " z rocznika ", rocznik, " o tablicach ", tablica)
+
+
+def status_auta(nazwa_pliku):
+  nazwa_pliku += ".txt"
+  with open(nazwa_pliku) as status_check:
+    wypisywacz = csv.reader(status_check, delimiter=",")
+    for linia in wypisywacz:
+      dzien = linia[5]
+      miesiac = linia[6]
+      rok = linia[7]
+      nowy_dzien = int(linia[5]) + 7
+      nowy_miesiac = int(linia[6])
+      nowy_rok = int(linia[7])
+      print("Oddany samochód do naprawy", dzien, ".", miesiac, ".", rok, " będzie gotowy na ", nowy_dzien, ".", nowy_miesiac, ".", nowy_rok)
 
 
 while system_logowania(wprowadz_nazwe(), wprowadz_haslo()) == True:
@@ -95,7 +130,22 @@ while system_logowania(wprowadz_nazwe(), wprowadz_haslo()) == True:
     auto.zgloszenie()
     zapisywanie_danych_auta(marka, model, rocznik, tablica, jaki_problem,
                             tablica)
+    break
   elif dzialanie == 2:
-    print("Status")
+    print('''
+=============================================
+| Podaj numer rejestracyjny samochodu.      |
+=============================================
+''')
+    status = input("Podaj numery tablicy rejestracyjnej:")
+    status_auta(status)
+    break
   elif dzialanie == 3:
-    print("Odbiór")
+    print('''
+=============================================
+| Wybraleś odbiór samochodu.                |
+=============================================
+''')
+    auto_odbierane = input("Podaj numery tablicy rejestracyjnej:")
+    odczytywanie_danych_auta(auto_odbierane)
+    break
