@@ -13,12 +13,16 @@ import datetime
 def system_logowania(inlog, inpass):
   if inlog == dane_logowania.username:
     if inpass == dane_logowania.password:
-      print("Zalogowano!")
+      print("Zalogowano! Witaj ", dane_logowania.username,
+            " miło Cię znowu widzieć.")
       zapisywanie_czasu()
+      return True
     else:
       print("Złe dane logowania!")
+      return False
   else:
     print("Nie ma takiego użytkownika")
+    return False
 
 
 # wprowadzanie nazwy użytkownika
@@ -43,4 +47,16 @@ def zapisywanie_czasu():
   f.close()
 
 
-system_logowania(wprowadz_nazwe(), wprowadz_haslo())
+if system_logowania(wprowadz_nazwe(), wprowadz_haslo()) == True:
+  print('''
+=======================================
+| Co chciałbyś zrobić dalej?          |
+=======================================
+| 1: Oddać auto do naprawy.           |
+=======================================
+| 2: Sprawdzić status naprawy.        |
+=======================================
+| 3: Oddebrać auto po naprawie.       |
+=======================================
+''')
+  dzialanie = int(input("Wybierz opcję: "))
