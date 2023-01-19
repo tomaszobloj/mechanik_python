@@ -81,7 +81,7 @@ def odczytywanie_danych_auta(nazwa_pliku):
       tablica = linia[3]
       jaki_problem = linia[4]
       print("Problem :", jaki_problem,
-            " został rozwiązany w samochodzie marki ", marka, model,
+            " został naprawiony w samochodzie marki ", marka, model,
             " z rocznika ", rocznik, " o tablicach ", tablica)
 
 
@@ -96,7 +96,8 @@ def status_auta(nazwa_pliku):
       nowy_dzien = int(linia[5]) + 7
       nowy_miesiac = int(linia[6])
       nowy_rok = int(linia[7])
-      print("Oddany samochód do naprawy", dzien, ".", miesiac, ".", rok, " będzie gotowy na ", nowy_dzien, ".", nowy_miesiac, ".", nowy_rok)
+      print("Oddany samochód do naprawy", dzien, ".", miesiac, ".", rok,
+            " będzie gotowy na ", nowy_dzien, ".", nowy_miesiac, ".", nowy_rok)
 
 
 while system_logowania(wprowadz_nazwe(), wprowadz_haslo()) == True:
@@ -111,9 +112,10 @@ while system_logowania(wprowadz_nazwe(), wprowadz_haslo()) == True:
 | 3: Oddebrać auto po naprawie.             |
 =============================================
 ''')
-  dzialanie = int(input("Wybierz opcję(1,2,3): "))
-  if dzialanie == 1:
-    print('''
+  try:
+    dzialanie = int(input("Wybierz opcję: "))
+    if dzialanie == 1:
+      print('''
 =============================================
 | Wybraleś zgłoszenie samochodu do naprawy. |
 =============================================
@@ -121,31 +123,35 @@ while system_logowania(wprowadz_nazwe(), wprowadz_haslo()) == True:
 =============================================
 
 ''')
-    marka = input("Marka: ")
-    model = input("Model: ")
-    rocznik = input("Rocznik: ")
-    tablica = input("Tablica rejestracyjna:")
-    jaki_problem = input("Problem: ")
-    auto = k.Samochod(marka, model, rocznik, tablica, jaki_problem)
-    auto.zgloszenie()
-    zapisywanie_danych_auta(marka, model, rocznik, tablica, jaki_problem,
-                            tablica)
-    break
-  elif dzialanie == 2:
-    print('''
+      marka = input("Marka: ")
+      model = input("Model: ")
+      rocznik = input("Rocznik: ")
+      tablica = input("Tablica rejestracyjna:")
+      jaki_problem = input("Problem: ")
+      auto = k.Samochod(marka, model, rocznik, tablica, jaki_problem)
+      auto.zgloszenie()
+      zapisywanie_danych_auta(marka, model, rocznik, tablica, jaki_problem,
+                              tablica)
+      break
+    elif dzialanie == 2:
+      print('''
 =============================================
 | Podaj numer rejestracyjny samochodu.      |
 =============================================
 ''')
-    status = input("Podaj numery tablicy rejestracyjnej:")
-    status_auta(status)
-    break
-  elif dzialanie == 3:
-    print('''
+      status = input("Podaj numery tablicy rejestracyjnej:")
+      status_auta(status)
+      break
+    elif dzialanie == 3:
+      print('''
 =============================================
 | Wybraleś odbiór samochodu.                |
 =============================================
 ''')
-    auto_odbierane = input("Podaj numery tablicy rejestracyjnej:")
-    odczytywanie_danych_auta(auto_odbierane)
-    break
+      auto_odbierane = input("Podaj numery tablicy rejestracyjnej:")
+      odczytywanie_danych_auta(auto_odbierane)
+      break
+    else:
+      print("Wybrałeś złą opcję!")
+  except:
+    print("Podaj wartość liczbową.")
