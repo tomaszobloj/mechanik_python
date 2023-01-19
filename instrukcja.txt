@@ -1,0 +1,5 @@
+Krok 1. Zalogować się jako user z hasłem user1.
+Krok 2. Wybrać odpowiednią operację z 3 możliwych wpisując 1, 2 lub 3.
+  Opcja 1. Podać informację o zgłaszanym samochodzie. Wpisać pokolei model, markę, rocznik, tablicę rejestracyjną oraz jaki problem występuje.
+  Opcja 2. Wpisać numer rejestracyjny wcześniej zgłoszonego samochodu, aby sprawdzić jego status kiedy bedzię gotowy do odbioru.
+  Opcja 3. Wpisać numer rejestracyjny wcześniej zgłoszonego samochodu, aby sprawdzić czy usterka została usunięta.
