@@ -1,3 +1,10 @@
+System logowania z dekoratorem ktory zapisuje dane logowaniaw pliku.
+Program obiektowy(klasy, konstruktory, destruktory, hermetyzacja).
+Wykorzysywanie modułów(import...).
+Zapisywanie obiektów w liscie.
+
+Projekt działa na platformie replit.com oraz na systemie Windows 10.
+
 Krok 1. Zalogować się jako user z hasłem user1.
 Krok 2. Wybrać odpowiednią operację z 3 możliwych wpisując 1, 2 lub 3.
   Opcja 1. Podać informację o zgłaszanym samochodzie. Wpisać pokolei model, markę, rocznik, tablicę rejestracyjną oraz jaki problem występuje.

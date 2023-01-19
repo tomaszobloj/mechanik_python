@@ -50,7 +50,7 @@ def zapisywanie_czasu():
   f.close()
 
 
-# zapisywanie danych ktore wprowadzi uzytkownik o naprawie samochodu i zapisanie do listy w pliku
+# zapisywanie danych które wprowadził użytkownik o naprawie samochodu i zapisanie do listy w pliku
 def zapisywanie_danych_auta(marka, model, rocznik, tablica, jaki_problem,
                             nazwa_pliku):
   x = datetime.datetime.now()
@@ -69,6 +69,7 @@ def zapisywanie_danych_auta(marka, model, rocznik, tablica, jaki_problem,
       [marka, model, rocznik, tablica, jaki_problem, dzien, miesiac, rok])
 
 
+# odczytywanie danych z pliku
 def odczytywanie_danych_auta(nazwa_pliku):
   nazwa_pliku += ".txt"
   with open(nazwa_pliku) as txt_file:
@@ -85,6 +86,7 @@ def odczytywanie_danych_auta(nazwa_pliku):
             " z rocznika ", rocznik, " o tablicach ", tablica)
 
 
+# sprawdzanie statusu samochodu
 def status_auta(nazwa_pliku):
   nazwa_pliku += ".txt"
   with open(nazwa_pliku) as status_check:
@@ -100,6 +102,7 @@ def status_auta(nazwa_pliku):
             " będzie gotowy na ", nowy_dzien, ".", nowy_miesiac, ".", nowy_rok)
 
 
+# główna pętla z funkcjami programu, działa gdy użytkownik poprawnie się zaloguje
 while system_logowania(wprowadz_nazwe(), wprowadz_haslo()) == True:
   print('''
 =============================================
